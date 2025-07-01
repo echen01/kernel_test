@@ -10,6 +10,12 @@
 #include "BasicGeometricElements.h"
 #include "BasicMeshElements.h"
 
+/**
+ * Computes the half-spaces from the triangles of a mesh.
+ * @param tris A vector of triangles (as indices to a vertex list) from the mesh.
+ * @param verts A vector of vertices from the mesh.
+ * @param halfSpaces A vector to store the computed half-spaces.
+ */
 void computeHalfSpacesFromTriangles(const std::vector<Triangle> &tris, const std::vector<Vertex> &verts, std::vector<HalfSpace> &halfSpaces)
 {
     for (int i = 0; i < tris.size(); i++)
