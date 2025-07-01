@@ -11,8 +11,8 @@ using namespace std;
 
 /**
  * Returns a kernel point of the given mesh, or NULL if no such point exists.
- * @param meshName The mesh to find a kernel point i, in .obj or .off format.
- * @return A pointer to an array of 3 doubles representing the kernel point, or NULL if no such point exists.
+ * @param meshName The mesh to find a kernel point of, in .obj or .off format.
+ * @return A 3D array representing the kernel point, or NULL if no such point exists.
  */
 double *kernelPoint(string MeshName)
 {
@@ -39,7 +39,7 @@ double *kernelPoint(string MeshName)
         A.row(i) << hp.ABCD[0], hp.ABCD[1], hp.ABCD[2];
         b(i) = -hp.ABCD[3];
     }
-    c << 0.0, 0.0, 1.0; // +z axis by convention
+    c << 0.0, 0.0, 1.0; // Extreme direction
 
     // Solves min c^T x subject to Ax <= b
     double minobj = sdlp::linprog(c, A, b, x);
