@@ -42,3 +42,5 @@
 
 cpp/build
 datasets
+cpp/kernel_test
+.vscode

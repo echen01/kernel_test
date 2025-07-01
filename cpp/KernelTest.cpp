@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
     }
 
     std::cout
-        << "Time taken: " << duration.count() << " ms." << std::endl;
+        << "Time taken: " << duration.count() << " ms" << std::endl;
 
     return 0;
 }

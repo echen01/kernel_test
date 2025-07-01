@@ -6,7 +6,6 @@
 # ]
 # ///
 
-import glob
 from os import PathLike
 import sys
 from time import perf_counter_ns
@@ -59,7 +58,7 @@ def kernel_point(mesh_name: PathLike) -> np.ndarray | None:
     A = half_spaces[:, :3]  # (n, 3) # The normals of the half spaces
     b = -half_spaces[:, 3]  # (n, ) # The constant of the half spaces
 
-    result: OptimizeResult = linprog(c, A, b)
+    result: OptimizeResult = linprog(c, A, b, bounds=(None, None))
     if result.success:
         kp = result.x  # (3, )
     else:
