@@ -1,6 +1,8 @@
 # A kernel emptiness test for meshes
 
-Returns a kernel point if the kernel of a mesh is non-empty, and null otherwise.
+This program returns a kernel point if the kernel of a mesh is non-empty, and null otherwise. 
+
+
 The C++ and Python versions perform at about the same speed. The C++ version uses Seidel's LP algorithm for small dimensions, while Python uses the HiGHS Simplex solver.
 
 
