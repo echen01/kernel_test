@@ -12,9 +12,12 @@ If the kernel is non-empty, then it is convex. The shape is called *star shaped*
 ## Thea algorithm
 We use linear programming to test if the kernel of a mesh is non-empty.
 Each face of the mesh corresponds to a plane $(a_i, b_i, c_i, d_i)$ satisfying the equation $a_ix + b_iy + c_iz + d_i = 0$. Then points $x \in \mathbb{R}^3$ satisfying the visibility constraint below, for all faces, are elements of the kernel. 
-$$ Ax \leq b,$$
-
-$$A = \begin{bmatrix} a_1 & b_1 & c_1 \\ \vdots &\vdots& \vdots \\ a_n & b_n & c_n\end{bmatrix}, \quad  b = \begin{bmatrix} -d_1 \\ \vdots \\ -d_n \end{bmatrix}$$
+```math
+Ax \leq b,
+```
+```math
+A = \begin{bmatrix} a_1 & b_1 & c_1 \\ \vdots &\vdots& \vdots \\ a_n & b_n & c_n\end{bmatrix}, \quad  b = \begin{bmatrix} -d_1 \\\vdots \\  -d_n \end{bmatrix}^T
+```
 
 If no feasible solutions exist, the kernel is empty. 
 
