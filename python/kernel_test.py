@@ -8,14 +8,15 @@
 
 import glob
 from os import PathLike
-from time import perf_counter
+import sys
+from time import perf_counter_ns
 
 import numpy as np
-from scipy.optimize import linprog
+from scipy.optimize import linprog, OptimizeResult
 import trimesh
 
 
-def compute_half_space_from_triangles(triangles: np.ndarray) -> np.ndarray:
+def compute_half_spaces_from_triangles(triangles: np.ndarray) -> np.ndarray:
     """
     Computes the half spaces formed by a set of triangles.
     Each half space defines a plane [a, b, c, d] satisfying the equation:
@@ -28,11 +29,9 @@ def compute_half_space_from_triangles(triangles: np.ndarray) -> np.ndarray:
     returns: (n, 4) float array of half planes, in point-normal form.
     """
 
-    v1s, v2s, v3s = (
-        triangles[:, 0],
-        triangles[:, 1],
-        triangles[:, 2],
-    )  # (n, 3, 3) -> (n, 3), (n, 3), (n, 3)
+    v1s = triangles[:, 0]  # (n, 3)
+    v2s = triangles[:, 1]  # (n, 3)
+    v3s = triangles[:, 2]  # (n, 3)
 
     normals = np.cross(v2s - v1s, v3s - v2s)  # (n, 3)
     normals = normals / np.linalg.norm(normals)  # (n, 3)
@@ -54,13 +53,13 @@ def kernel_point(mesh_name: PathLike) -> np.ndarray | None:
     """
     mesh = trimesh.load(mesh_name)
 
-    half_spaces = compute_half_space_from_triangles(mesh.triangles)  # (n, 4)
+    half_spaces = compute_half_spaces_from_triangles(mesh.triangles)  # (n, 4)
 
     c = np.array([0.0, 0.0, 1.0])
     A = half_spaces[:, :3]  # (n, 3) # The normals of the half spaces
     b = -half_spaces[:, 3]  # (n, ) # The constant of the half spaces
 
-    result = linprog(c, A, b)
+    result: OptimizeResult = linprog(c, A, b)
     if result.success:
         kp = result.x  # (3, )
     else:
@@ -70,13 +69,17 @@ def kernel_point(mesh_name: PathLike) -> np.ndarray | None:
 
 
 def main() -> None:
-    paths = glob.glob("../../polyhedron_kernel/datasets/Thingi/*.off")
-    start = perf_counter()
-    for path in paths:
-        kp = kernel_point(path)
+    path = sys.argv[1]
+    if len(sys.argv) != 2:
+        print("Usage: python kernel_test.py <mesh_file_name>")
+        print("Example: python kernel_test.py cube.obj")
 
-    end = perf_counter()
-    print(f"Time taken: {end - start:.2f} seconds for {len(paths)} models.")
+    start = perf_counter_ns()
+    kp = kernel_point(path)
+    end = perf_counter_ns()
+
+    print("Kernel point found:", kp)
+    print(f"Time taken: {(end - start) * 1e-6:.2f}ms")
 
 
 if __name__ == "__main__":

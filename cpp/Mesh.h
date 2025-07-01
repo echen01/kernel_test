@@ -7,15 +7,15 @@
 #include <sstream>
 #include <string>
 #include <stdio.h>
-#include "BasicMeshElements.hpp"
+#include "BasicMeshElements.h"
 
 class Mesh
 {
 
 private:
-    vector<Vertex> verts;
-    vector<Triangle> tris;
-    vector<Edge> edges;
+    std::vector<Vertex> verts;
+    std::vector<Triangle> tris;
+    std::vector<Edge> edges;
 
 public:
     Mesh() {};
@@ -23,7 +23,7 @@ public:
     Mesh(const Mesh &mesh);
     void loadObj(const char *name);
     void loadOff(const char *name);
-    void writeOff(string offFileName);
+    void writeOff(std::string offFileName);
 
     // methods to construct mesh
     void addTriangle(int v1, int v2, int v3);
@@ -38,9 +38,9 @@ public:
     Vertex getVertex(int i) const { return verts[i]; };
     Triangle getTriangle(int i) const { return tris[i]; };
     Edge getEdge(int i) const { return edges[i]; };
-    const vector<Vertex> &getAllVerts() const { return verts; };
-    const vector<Triangle> &getAllTris() const { return tris; };
-    const vector<Edge> &getAllEdges() const { return edges; };
+    const std::vector<Vertex> &getAllVerts() const { return verts; };
+    const std::vector<Triangle> &getAllTris() const { return tris; };
+    const std::vector<Edge> &getAllEdges() const { return edges; };
 
     // methods to compute mesh features
     bool isManifold();
@@ -49,12 +49,36 @@ public:
     void computeTrisAngles();
     double computeVolume();
     void tetrahedralizeSurface();
-    vector<double> computeCurvaturePerVertex();
+    std::vector<double> computeCurvaturePerVertex();
     void makeConvex();
     void removeAbnormalTris();
     void rotate(double angles[3], double rotationCenter[3]);
     void translate(double distances[3]);
     void computeCenter(double center[3]);
-};
 
-#pragma once
+    std::vector<std::string> split(std::string inputStr, std::string delimiter)
+    {
+
+        std::vector<std::string> pieces;
+        std::string data = inputStr, subdata = "";
+
+        while (data != "")
+        {
+            int ind = data.find_first_of(delimiter);
+
+            if (ind < 0)
+                subdata = data;
+            else
+                subdata = data.substr(0, ind);
+
+            if (subdata != "")
+                pieces.push_back(subdata);
+
+            if (ind < 0)
+                break;
+            data = data.substr(ind + 1);
+        }
+
+        return pieces;
+    }
+};

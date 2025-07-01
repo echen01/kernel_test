@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "MathUtils.hpp"
+#include "MathUtils.h"
 
 struct Vertex
 {
@@ -11,9 +11,9 @@ struct Vertex
     double color[3]; // rgb
 
     // adjacencies
-    vector<int> vertList;
-    vector<int> triList;
-    vector<int> edgeList;
+    std::vector<int> vertList;
+    std::vector<int> triList;
+    std::vector<int> edgeList;
 
     Vertex() {};
     Vertex(int i, double *c);
@@ -27,7 +27,7 @@ struct Edge
     double length;
 
     // adjacency
-    vector<int> triList;
+    std::vector<int> triList;
 
     Edge(int i, int *c);
     ~Edge();
@@ -39,9 +39,9 @@ struct Triangle
     int idx;
     int corners[3];
     double normal[3];
-    vector<int> edgeList;
-    vector<int> triList; // neighbor tris
-    vector<double> angleList;
+    std::vector<int> edgeList;
+    std::vector<int> triList; // neighbor tris
+    std::vector<double> angleList;
     double angularSkewness;
     double squish;
 

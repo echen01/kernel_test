@@ -23,8 +23,6 @@
  *      doi:10.1007/BF02574699
  */
 
-#pragma once
-
 #ifndef SDLP_HPP
 #define SDLP_HPP
 

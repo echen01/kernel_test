@@ -1,25 +1,7 @@
 // @author Merve Asiler
 
-#pragma once
-
-#include <cmath>
-#include <vector>
-#include <tuple>
+#include "MathUtils.h"
 #include <iostream>
-
-#define EPSILON 1e-12
-#define PI 3.14159265
-
-using namespace std;
-
-class NOT_VALID : public exception
-{
-public:
-    virtual const char *what() const throw()
-    {
-        return "Not a valid mathematical operation, value, object, or etc.!";
-    }
-};
 
 double computeLength(const double *vect)
 {

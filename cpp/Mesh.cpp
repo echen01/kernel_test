@@ -1,16 +1,16 @@
 // @author Merve Asiler
 
-#include "Mesh.hpp"
+#include "Mesh.h"
 
 // Load the mesh in the OBJ file format
 void Mesh::loadObj(const char *name)
 {
-    string line;
-    vector<string> vertexInfoSet, cornerInfoSet;
+    std::string line;
+    std::vector<std::string> vertexInfoSet, cornerInfoSet;
     double vertexCoordSet[3];
     int cornerIdSet[4];
 
-    ifstream inpFile(name), curLinePtr;
+    std::ifstream inpFile(name), curLinePtr;
     if (inpFile.is_open())
     {
         while (!inpFile.eof())
@@ -23,7 +23,7 @@ void Mesh::loadObj(const char *name)
             {
                 vertexInfoSet = split(line, " ");
                 for (unsigned int i = 1; i < vertexInfoSet.size(); i++)
-                    sscanf_s(vertexInfoSet[i].c_str(), "%lf", &(vertexCoordSet[i - 1]));
+                    sscanf(vertexInfoSet[i].c_str(), "%lf", &(vertexCoordSet[i - 1]));
 
                 addVertex(vertexCoordSet[0], vertexCoordSet[1], vertexCoordSet[2]);
             }
@@ -33,7 +33,7 @@ void Mesh::loadObj(const char *name)
             {
                 cornerInfoSet = split(line, " ");
                 for (unsigned int i = 1; i < cornerInfoSet.size(); i++)
-                    sscanf_s(cornerInfoSet[i].c_str(), "%d/", &(cornerIdSet[i - 1]));
+                    sscanf(cornerInfoSet[i].c_str(), "%d/", &(cornerIdSet[i - 1]));
 
                 // quad ( means 2 triangles)
                 if (cornerInfoSet.size() > 4)
@@ -63,10 +63,10 @@ void Mesh::loadOff(const char *name)
 
     int nVerts, nTris, dummy;
     double x, y, z;
-    string line;
+    std::string line;
     int cornerId1, cornerId2, cornerId3;
 
-    ifstream inpFile(name);
+    std::ifstream inpFile(name);
     if (inpFile.is_open())
     {
 
@@ -95,23 +95,23 @@ void Mesh::loadOff(const char *name)
 }
 
 // Load the mesh in the OFF file format
-void Mesh::writeOff(string offFileName)
+void Mesh::writeOff(std::string offFileName)
 {
 
-    ofstream outFile;
+    std::ofstream outFile;
     outFile.open(offFileName);
-    outFile << "OFF" << endl;
+    outFile << "OFF" << std::endl;
 
     // Write the number of vertices and triangles (dummy is the number of edges)
-    outFile << this->getNumOfVerts() << " " << this->getNumOfTris() << " 0" << endl;
+    outFile << this->getNumOfVerts() << " " << this->getNumOfTris() << " 0" << std::endl;
 
     // Write the vertices
     for (int i = 0; i < this->getNumOfVerts(); i++)
-        outFile << this->getVertex(i).coords[0] << " " << this->getVertex(i).coords[1] << " " << this->getVertex(i).coords[2] << endl;
+        outFile << this->getVertex(i).coords[0] << " " << this->getVertex(i).coords[1] << " " << this->getVertex(i).coords[2] << std::endl;
 
     // Write the triangles
     for (int i = 0; i < this->getNumOfTris(); i++)
-        outFile << "3 " << this->getTriangle(i).corners[0] << " " << this->getTriangle(i).corners[1] << " " << this->getTriangle(i).corners[2] << endl;
+        outFile << "3 " << this->getTriangle(i).corners[0] << " " << this->getTriangle(i).corners[1] << " " << this->getTriangle(i).corners[2] << std::endl;
 
     outFile.close();
 }

@@ -1,5 +1,16 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "new": "cpp",
+        "random": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "limits": "cpp",
+        "format": "cpp",
+        "filesystem": "cpp",
+        "iosfwd": "cpp",
+        "vector": "cpp",
+        "fstream": "cpp",
+        "ostream": "cpp"
     }
 }
