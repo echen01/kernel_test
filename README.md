@@ -5,7 +5,9 @@ The C++ and Python versions perform at about the same speed. The C++ version use
 
 
 **Definition (Geometric Kernel):** The kernel $K$ of an object is the set of point from which the entire shape $S$ is visible. Formally, it is defined as 
-$$K = \{p \in S \mid (1 - t) p + tq \in S, \forall q\in S, \forall t \in [0, 1]\}.$$
+```math
+K = \{p \in S \mid (1 - t) p + tq \in S, \forall q\in S, \forall t \in [0, 1]\}.
+```
 
 If the kernel is non-empty, then it is convex. The shape is called *star shaped* if the kernel is non-empty.
 
