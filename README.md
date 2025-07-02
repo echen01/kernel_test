@@ -44,8 +44,7 @@ First compile the program.
 cd cpp
 make
 ```
-Then run the program with a `.off` or `.obj` mesh.
-Then 
+Then run the program with a `.off` or `.obj` mesh. 
 ```bash
 ./kernel_point path/to/mesh
 ```
