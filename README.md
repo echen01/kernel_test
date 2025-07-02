@@ -49,8 +49,12 @@ Then run the program with a `.off` or `.obj` mesh.
 ```
 
 ## Python
-The Python version requires `scipy` and `trimesh`.
-```bash
+First install the dependencies.
+```
 cd python
+pip install scipy trimesh
+```
+Then run the program. This version supports any `trimesh` file type. 
+```bash
 python kernel_test.py path/to/mesh
 ```
