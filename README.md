@@ -54,7 +54,7 @@ First install the dependencies.
 cd python
 pip install scipy trimesh
 ```
-Then run the program. This version supports any `trimesh` file type. 
+Then run the program. The Python version supports any `trimesh` file type. 
 ```bash
 python kernel_test.py path/to/mesh
 ```
