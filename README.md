@@ -15,7 +15,7 @@ If the kernel is non-empty, then it is convex. The shape is called *star shaped*
 
 ## The algorithm
 We use linear programming to test if the kernel of a mesh is non-empty.
-Each face of the mesh corresponds to a plane $(a_i, b_i, c_i, d_i)$ satisfying the equation $a_ix + b_iy + c_iz + d_i = 0$. From these faces, we can form a system of inequalities defining the visiblity constraint:
+Each face of the mesh corresponds to a plane $(a_i, b_i, c_i, d_i)$ satisfying the equation $a_ix + b_iy + c_iz + d_i = 0$. From these faces, we can form a system of inequalities defining the visibility constraint:
 ```math
 Ax \leq b,
 ```
